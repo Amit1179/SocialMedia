@@ -5,6 +5,7 @@ using SocialMedia.Services;
 
 namespace SocialMedia.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
@@ -16,14 +17,14 @@ namespace SocialMedia.Controllers
             _postService = postService;
         }
 
-
+        [ServiceFilter(typeof(ExecutionTimeFilter))]
         [HttpGet]
         public async Task<IActionResult> GetAllPosts()
         {
             var posts = await _postService.GetAllPostsWithDetailsAsync();
             return Ok(posts);
         }
-
+        [ServiceFilter(typeof(ExecutionTimeFilter))]
         [HttpGet ("{id}")]
         public async Task<IActionResult> GetPost(int id)
         {

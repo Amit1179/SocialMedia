@@ -22,10 +22,14 @@ namespace SocialMedia
             builder.Services.AddScoped<IPostRepo, PostRepo>();
             builder.Services.AddScoped<IPostService, PostService>();
 
-            builder.Services.AddControllers().AddJsonOptions(options =>
+            builder.Services.AddControllers(options =>
+            options.Filters.Add<ExecutionTimeFilter>())
+            .AddJsonOptions(options =>
             {
+                
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
             });
+            builder.Services.AddScoped<ExecutionTimeFilter>();
 
             builder.Services.AddSwaggerGen();
 

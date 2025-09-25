@@ -15,7 +15,7 @@ namespace SocialMedia.Repos
             _context = context;
         }
 
-        public async Task<PostDto> GetPostWithDetailsByIdAsync(int postId)
+        public async Task<PostDto?> GetPostWithDetailsByIdAsync(int postId)
         {
             return await _context.Posts
             .Where(p => p.PostId == postId)
